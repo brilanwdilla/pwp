@@ -1,0 +1,78 @@
+{% extends 'layout.html' %}
+{% block head %}
+<title>Register User - Perpustakaan</title>
+{% endblock %}
+{% block body %}
+<div class="mt-5"></div>
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-header bg-success text-white">
+                <h4 class="text-center mb-0">Daftar Akun Anggota/User Baru</h4>
+            </div>
+            <div class="card-body">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }} py-2">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <form method="POST">
+                    <div class="mb-3">
+                        <label class="form-label">Silahkan Masukan Username</label>
+                        <input name="username" type="text" class="form-control" required autocomplete="username">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" id="password" name="password" class="form-control" required autocomplete="new-password">
+                        <div class="form-text text-muted">Minimal 8 karakter.</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Konfirmasi Password</label>
+                        <input type="password" id="konfirmasi_password" name="konfirmasi_password" class="form-control" required autocomplete="new-password">
+                    </div>
+
+                    <!-- Checkbox Tampilkan Password diletakkan rapi di luar form-control -->
+                    <div class="mb-3 form-check">
+                        <input class="form-check-input" type="checkbox" id="showPasswordCheck">
+                        <label class="form-check-label text-muted small" for="showPasswordCheck">
+                            Tampilkan password
+                        </label>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success mt-2">Daftar Sekarang</button>
+                    </div>
+                </form>
+
+                <div class="text-center mt-3">
+                    <small>Sudah punya akun anggota? <a href="{{ url_for('login_user') }}" class="text-decoration-none">Login di sini</a></small>
+                </div>
+                <div class="text-center mt-2">
+                    <small><a href="{{ url_for('index') }}" class="text-muted">Kembali ke Beranda Utama</a></small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const showPasswordCheck = document.querySelector('#showPasswordCheck');
+        const password = document.querySelector('#password');
+        const konfirmasiPassword = document.querySelector('#konfirmasi_password');
+
+        if (showPasswordCheck && password && konfirmasiPassword) {
+            showPasswordCheck.addEventListener('change', function () {
+                const type = this.checked ? 'text' : 'password';
+                password.setAttribute('type', type);
+                konfirmasiPassword.setAttribute('type', type);
+            });
+        }
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'layout.html' %}
+{% block head %}
+<title>Login User - Perpustakaan</title>
+{% endblock %}
+{% block body %}
+<div class="mt-5"></div>
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="text-center mb-0">Login Anggota / User</h4>
+            </div>
+            <div class="card-body">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }} py-2">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <form method="POST">
+                    <div class="mb-3">
+                        <label class="form-label">Username</label>
+                        <input name="username" type="text" class="form-control" required autocomplete="username">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" id="password" name="password" class="form-control" required autocomplete="current-password">
+                        
+                        <!-- Checkbox Tampilkan Password di bawah input -->
+                        <div class="form-check mt-2">
+                            <input class="form-check-input" type="checkbox" id="showPasswordCheck">
+                            <label class="form-check-label text-muted small" for="showPasswordCheck">
+                                Tampilkan password
+                            </label>
+                        </div>
+                    </div>
+                    <div class="text-center mt-2">
+    <small><a href="{{ url_for('lupa_password_user') }}" class="text-decoration-none text-muted">Lupa password?</a></small>
+</div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary mt-3">Login User</button>
+                    </div>
+                </form>
+
+                <div class="text-center mt-3">
+                    <small>Belum punya akun anggota? <a href="{{ url_for('register_user') }}" class="text-decoration-none">Daftar di sini</a></small>
+                </div>
+                <div class="text-center mt-2">
+                    <small><a href="{{ url_for('index') }}" class="text-muted">Kembali ke Beranda Utama</a></small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const showPasswordCheck = document.querySelector('#showPasswordCheck');
+        const password = document.querySelector('#password');
+
+        if (showPasswordCheck && password) {
+            showPasswordCheck.addEventListener('change', function () {
+                const type = this.checked ? 'text' : 'password';
+                password.setAttribute('type', type);
+            });
+        }
+    });
+</script>
+{% endblock %}

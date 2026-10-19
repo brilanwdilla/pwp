@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+{% block head %}
+<title>Selamat Datang di Perpustakaan</title>
+{% endblock %}
+{% block body %}
+<div class="container text-center mt-5">
+    <div class="py-5">
+        <h1 class="display-4 fw-bold text-primary mb-3">Welcome to Library online</h1>
+        <p class="lead text-muted mb-4">Selamat datang di Perpustakaan Online silahkan Registrasi/Login.</p>
+        
+        <div class="row justify-content-center gap-3 mt-4">
+            <div class="col-md-4">
+                <div class="card shadow-sm h-100 border-primary">
+                    <div class="card-body d-flex flex-column justify-content-center align-items-center p-4">
+                        <h3 class="card-title text-primary mb-3">Portal untuk Anggota / User</h3>
+                        <p class="card-text text-muted mb-4">Jelajahi ratusan koleksi buku favoritmu, cek ketersediaan stok secara real-time, dan pinjam buku impianmu hanya dengan sekali klik!</p>
+                        <a href="{{ url_for('login_user') }}" class="btn btn-primary btn-lg w-100">Login User</a>
+                    </div>
+                </div>
+            </div>
+        <div class="col-md-4">
+    <div class="card shadow-sm h-100 border-0 bg-light">
+        <div class="card-body d-flex flex-column justify-content-between align-items-center p-4 text-center">
+            <div>
+                <h3 class="card-title text-secondary mb-3">Portal Khusus Admin / Staff</h3>
+                <p class="card-text text-muted mb-4">Khusus pengelola sistem. Masuk ke ruang kerja untuk update buku baru, atur stok harian, dan kelola operasional perpustakaan.</p>
+            </div>
+            <div>
+                <a href="{{ url_for('login') }}" class="text-decoration-none fw-bold text-secondary">
+                    &rarr; Masuk ke Halaman Login Admin
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
